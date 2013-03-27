@@ -23,7 +23,7 @@
 {
     self = [super init];
     if (self) {
-        self.position = [[PGPolarCoordinate alloc] init];
+        self.position = [[PGPolarCoordinate alloc] initWithR:50 theta:PGConvertDegreesToRadians(225)];
     }
     
     return self;
