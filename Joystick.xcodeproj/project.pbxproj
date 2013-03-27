@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C03B51A17027D6800900E24 /* MainMenu-ObjectController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C03B51817027D6800900E24 /* MainMenu-ObjectController.xib */; };
 		4CE224DB170227C10053CFAD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE224DA170227C10053CFAD /* Cocoa.framework */; };
 		4CE224E5170227C10053CFAD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CE224E3170227C10053CFAD /* InfoPlist.strings */; };
 		4CE224E7170227C10053CFAD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224E6170227C10053CFAD /* main.m */; };
 		4CE224EB170227C10053CFAD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4CE224E9170227C10053CFAD /* Credits.rtf */; };
-		4CE224EE170227C10053CFAD /* PGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224ED170227C10053CFAD /* PGAppDelegate.m */; };
-		4CE224F1170227C10053CFAD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE224EF170227C10053CFAD /* MainMenu.xib */; };
+		4CE224F1170227C10053CFAD /* MainMenu-ArrayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE224EF170227C10053CFAD /* MainMenu-ArrayController.xib */; };
+		4CE224FD170227EF0053CFAD /* PGJoystickController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224F8170227EF0053CFAD /* PGJoystickController.m */; };
+		4CE224FE170227EF0053CFAD /* PGJoystickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224FA170227EF0053CFAD /* PGJoystickView.m */; };
+		4CE224FF170227EF0053CFAD /* PGPolarCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224FC170227EF0053CFAD /* PGPolarCoordinate.m */; };
+		4CE22502170228020053CFAD /* PGGeometryUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE22501170228020053CFAD /* PGGeometryUtilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C03B51917027D6800900E24 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MainMenu-ObjectController.xib"; sourceTree = "<group>"; };
 		4CE224D7170227C10053CFAD /* Joystick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joystick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE224DA170227C10053CFAD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4CE224DD170227C10053CFAD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -26,9 +31,15 @@
 		4CE224E6170227C10053CFAD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4CE224E8170227C10053CFAD /* Joystick-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Joystick-Prefix.pch"; sourceTree = "<group>"; };
 		4CE224EA170227C10053CFAD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		4CE224EC170227C10053CFAD /* PGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PGAppDelegate.h; sourceTree = "<group>"; };
-		4CE224ED170227C10053CFAD /* PGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PGAppDelegate.m; sourceTree = "<group>"; };
-		4CE224F0170227C10053CFAD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		4CE224F0170227C10053CFAD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MainMenu-ArrayController.xib"; sourceTree = "<group>"; };
+		4CE224F7170227EF0053CFAD /* PGJoystickController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGJoystickController.h; sourceTree = "<group>"; };
+		4CE224F8170227EF0053CFAD /* PGJoystickController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGJoystickController.m; sourceTree = "<group>"; };
+		4CE224F9170227EF0053CFAD /* PGJoystickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGJoystickView.h; sourceTree = "<group>"; };
+		4CE224FA170227EF0053CFAD /* PGJoystickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGJoystickView.m; sourceTree = "<group>"; };
+		4CE224FB170227EF0053CFAD /* PGPolarCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPolarCoordinate.h; sourceTree = "<group>"; };
+		4CE224FC170227EF0053CFAD /* PGPolarCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGPolarCoordinate.m; sourceTree = "<group>"; };
+		4CE22500170228020053CFAD /* PGGeometryUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PGGeometryUtilities.h; path = ../../../Common/Utilities/PGGeometryUtilities.h; sourceTree = "<group>"; };
+		4CE22501170228020053CFAD /* PGGeometryUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PGGeometryUtilities.m; path = ../../../Common/Utilities/PGGeometryUtilities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,9 +93,15 @@
 		4CE224E0170227C10053CFAD /* Joystick */ = {
 			isa = PBXGroup;
 			children = (
-				4CE224EC170227C10053CFAD /* PGAppDelegate.h */,
-				4CE224ED170227C10053CFAD /* PGAppDelegate.m */,
-				4CE224EF170227C10053CFAD /* MainMenu.xib */,
+				4CE224FB170227EF0053CFAD /* PGPolarCoordinate.h */,
+				4CE224FC170227EF0053CFAD /* PGPolarCoordinate.m */,
+				4CE224F7170227EF0053CFAD /* PGJoystickController.h */,
+				4CE224F8170227EF0053CFAD /* PGJoystickController.m */,
+				4CE224F9170227EF0053CFAD /* PGJoystickView.h */,
+				4CE224FA170227EF0053CFAD /* PGJoystickView.m */,
+				4C03B51817027D6800900E24 /* MainMenu-ObjectController.xib */,
+				4CE224EF170227C10053CFAD /* MainMenu-ArrayController.xib */,
+				4CE22503170228180053CFAD /* Utilities */,
 				4CE224E1170227C10053CFAD /* Supporting Files */,
 			);
 			path = Joystick;
@@ -100,6 +117,15 @@
 				4CE224E9170227C10053CFAD /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4CE22503170228180053CFAD /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4CE22500170228020053CFAD /* PGGeometryUtilities.h */,
+				4CE22501170228020053CFAD /* PGGeometryUtilities.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,7 +182,8 @@
 			files = (
 				4CE224E5170227C10053CFAD /* InfoPlist.strings in Resources */,
 				4CE224EB170227C10053CFAD /* Credits.rtf in Resources */,
-				4CE224F1170227C10053CFAD /* MainMenu.xib in Resources */,
+				4CE224F1170227C10053CFAD /* MainMenu-ArrayController.xib in Resources */,
+				4C03B51A17027D6800900E24 /* MainMenu-ObjectController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,13 +195,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CE224E7170227C10053CFAD /* main.m in Sources */,
-				4CE224EE170227C10053CFAD /* PGAppDelegate.m in Sources */,
+				4CE224FD170227EF0053CFAD /* PGJoystickController.m in Sources */,
+				4CE224FE170227EF0053CFAD /* PGJoystickView.m in Sources */,
+				4CE224FF170227EF0053CFAD /* PGPolarCoordinate.m in Sources */,
+				4CE22502170228020053CFAD /* PGGeometryUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		4C03B51817027D6800900E24 /* MainMenu-ObjectController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C03B51917027D6800900E24 /* en */,
+			);
+			name = "MainMenu-ObjectController.xib";
+			sourceTree = "<group>";
+		};
 		4CE224E3170227C10053CFAD /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -191,12 +229,12 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		4CE224EF170227C10053CFAD /* MainMenu.xib */ = {
+		4CE224EF170227C10053CFAD /* MainMenu-ArrayController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				4CE224F0170227C10053CFAD /* en */,
 			);
-			name = MainMenu.xib;
+			name = "MainMenu-ArrayController.xib";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -304,6 +342,7 @@
 				4CE224F6170227C10053CFAD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
