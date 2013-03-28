@@ -30,8 +30,8 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 - (void)drawDisabledInRect:(NSRect)dirtyRect;
 - (void)setNeedsDisplayInShadowCrosshairsRect;
 
-- (void)setAngle:(double)angle invalidateRects:(BOOL)shouldInvalidateRects;
-- (void)setOffset:(double)offset invalidateRects:(BOOL)shouldInvalidateRects;
+- (void)setAngle:(double)angle invalidatingRects:(BOOL)shouldInvalidateRects;
+- (void)setOffset:(double)offset invalidatingRects:(BOOL)shouldInvalidateRects;
 
 // Bindings
 + (NSSet *)bindingsNames;
@@ -65,12 +65,6 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     for (NSString *binding in [self bindingsNames]) {
         [self exposeBinding:binding];
     }
-}
-
-
-+ (BOOL)accessInstanceVariablesDirectly
-{
-    return NO;
 }
 
 
@@ -198,11 +192,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 
 - (NSDictionary *)infoForBinding:(NSString *)binding
 {
-    if (![[PGJoystickView bindingsNames] containsObject:binding]) {
-        return [super infoForBinding:binding];
-    }
-    
-    return [_bindingsInfo objectForKey:binding];
+    return [[PGJoystickView bindingsNames] containsObject:binding] ? [_bindingsInfo objectForKey:binding] : [super infoForBinding:binding];
 }
 
 
@@ -265,10 +255,6 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     }
     
     if (NSIsControllerMarker(value)) {
-        BOOL wasDisplayable = [self isDisplayable];
-        
-        [_bindingsMarkers setObject:value forKey:binding];
-        
         // Intentionally don't use accessors to avoid triggering KVO notifications
         if (binding == PGJoystickViewAngleBindingName) {
             _angle = -1;
@@ -277,9 +263,12 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
         }
         
         // If we were displayable before, we need to be redrawn
+        BOOL wasDisplayable = [self isDisplayable];
+        [_bindingsMarkers setObject:value forKey:binding];
         if (wasDisplayable) {
             [self setNeedsDisplay:YES];
         }
+        
         return;
     }
     
@@ -325,7 +314,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     [_bindingsInfo removeObjectForKey:binding];
     if ([_bindingsMarkers objectForKey:binding]) {
         [_bindingsMarkers removeObjectForKey:binding];
-        [self setValue:nil forKey:binding];
+        [self setNilValueForKey:binding];
     }
 }
 
@@ -372,13 +361,13 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     [self setNeedsDisplayInShadowCrosshairsRect];
     
     double oldOffset = _offset;
-    [self setOffset:hypot(cartesianOffset.width, cartesianOffset.height) invalidateRects:NO];
+    [self setOffset:hypot(cartesianOffset.width, cartesianOffset.height) invalidatingRects:NO];
     if (oldOffset != _offset) {
         [self updateObservedObjectForBinding:PGJoystickViewOffsetBindingName];
     }
     
     double oldAngle = _angle;
-    [self setAngle:PGConvertRadiansToDegrees(atan2(cartesianOffset.height, cartesianOffset.width)) invalidateRects:NO];
+    [self setAngle:PGConvertRadiansToDegrees(atan2(cartesianOffset.height, cartesianOffset.width)) invalidatingRects:NO];
     if (oldAngle != _angle) {
         [self updateObservedObjectForBinding:PGJoystickViewAngleBindingName];
     }
@@ -398,7 +387,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 }
 
 
-- (void)setAngle:(double)angle invalidateRects:(BOOL)shouldInvalidateRects
+- (void)setAngle:(double)angle invalidatingRects:(BOOL)shouldInvalidateRects
 {
     angle = fmod(angle, 360);
     if (angle < 0) angle += 360;
@@ -411,11 +400,11 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 
 - (void)setAngle:(double)angle
 {
-    [self setAngle:angle invalidateRects:YES];
+    [self setAngle:angle invalidatingRects:YES];
 }
 
 
-- (void)setOffset:(double)offset invalidateRects:(BOOL)shouldInvalidateRects
+- (void)setOffset:(double)offset invalidatingRects:(BOOL)shouldInvalidateRects
 {
     offset = fmin(fabs(offset), _maximumOffset);
     if (offset == _offset) return;
@@ -427,7 +416,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 
 - (void)setOffset:(double)offset
 {
-    [self setOffset:offset invalidateRects:YES];
+    [self setOffset:offset invalidatingRects:YES];
 }
 
 
