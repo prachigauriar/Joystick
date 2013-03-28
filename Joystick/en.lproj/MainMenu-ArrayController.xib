@@ -2080,14 +2080,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">angleField</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="542649440"/>
-					</object>
-					<int key="connectionID">795</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">positionController</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="140983477"/>

@@ -33,7 +33,7 @@
 - (void)awakeFromNib
 {
     [_joystickView setMaximumOffset:100];
-    //[_positionController setContent:_positions];
+    [_positionController setContent:_positions];
     
     [_joystickView bind:@"angle"
                toObject:_positionController
