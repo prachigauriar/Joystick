@@ -14,6 +14,12 @@
 
 @property(weak) IBOutlet NSWindow *window;
 @property(weak) IBOutlet PGJoystickView *joystickView;
-@property(weak) IBOutlet NSObjectController *positionController;
+@property(weak) IBOutlet NSArrayController *positionController;
+
+- (NSUInteger)countOfPositions;
+- (PGPolarCoordinate *)objectInPositionsAtIndex:(NSUInteger)index;
+- (void)insertObject:(PGPolarCoordinate *)position inPositionsAtIndex:(NSUInteger)index;
+- (void)removeObjectFromPositionsAtIndex:(NSUInteger)index;
+- (void)replaceObjectInPositionsAtIndex:(NSUInteger)index withObject:(PGPolarCoordinate *)position;
 
 @end

@@ -13,7 +13,7 @@
 #import "PGGeometryUtilities.h"
 
 @interface PGJoystickController ()
-@property(readwrite, retain) PGPolarCoordinate *position;
+@property(readwrite, retain) NSMutableArray *positions;
 @end
 
 
@@ -23,7 +23,7 @@
 {
     self = [super init];
     if (self) {
-        self.position = [[PGPolarCoordinate alloc] initWithR:50 theta:PGConvertDegreesToRadians(225)];
+        self.positions = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -33,7 +33,7 @@
 - (void)awakeFromNib
 {
     [_joystickView setMaximumOffset:100];
-    [_positionController setContent:_position];
+    //[_positionController setContent:_positions];
     
     [_joystickView bind:@"angle"
                toObject:_positionController
@@ -43,5 +43,34 @@
     [_joystickView bind:@"offset" toObject:_positionController withKeyPath:@"selection.r" options:nil];
 }
 
+
+- (NSUInteger)countOfPositions
+{
+    return [_positions count];
+}
+
+
+- (PGPolarCoordinate *)objectInPositionsAtIndex:(NSUInteger)index
+{
+    return [_positions objectAtIndex:index];
+}
+
+
+- (void)insertObject:(PGPolarCoordinate *)position inPositionsAtIndex:(NSUInteger)index
+{
+    [_positions insertObject:position atIndex:index];
+}
+
+
+- (void)removeObjectFromPositionsAtIndex:(NSUInteger)index
+{
+    [_positions removeObjectAtIndex:index];
+}
+
+
+- (void)replaceObjectInPositionsAtIndex:(NSUInteger)index withObject:(PGPolarCoordinate *)position
+{
+    [_positions replaceObjectAtIndex:index withObject:position];
+}
 
 @end

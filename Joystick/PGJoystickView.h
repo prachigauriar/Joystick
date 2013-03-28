@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PGJoystickView : NSView
+@interface PGJoystickView : NSView {
+@protected
+    NSMutableDictionary *_bindingsInfo;
+}
 
 @property(readwrite, assign, nonatomic) double angle;
 @property(readwrite, assign, nonatomic) double offset;
