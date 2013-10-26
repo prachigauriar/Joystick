@@ -32,27 +32,27 @@
 
 - (void)awakeFromNib
 {
-    [_joystickView setMaximumOffset:100];
-    [_positionController setContent:_positions];
+    self.joystickView.maximumOffset = 100;
+    self.positionController.content = _positions;
     
-    [_joystickView bind:@"angle"
-               toObject:_positionController
+    [self.joystickView bind:@"angle"
+               toObject:self.positionController
             withKeyPath:@"selection.theta"
                 options:@{ NSValueTransformerNameBindingOption : @"PGRadiansToDegreesValueTransformer" }];
     
-    [_joystickView bind:@"offset" toObject:_positionController withKeyPath:@"selection.r" options:nil];
+    [self.joystickView bind:@"offset" toObject:self.positionController withKeyPath:@"selection.r" options:nil];
 }
 
 
 - (NSUInteger)countOfPositions
 {
-    return [_positions count];
+    return _positions.count;
 }
 
 
 - (PGPolarCoordinate *)objectInPositionsAtIndex:(NSUInteger)index
 {
-    return [_positions objectAtIndex:index];
+    return _positions[index];
 }
 
 
@@ -70,7 +70,7 @@
 
 - (void)replaceObjectInPositionsAtIndex:(NSUInteger)index withObject:(PGPolarCoordinate *)position
 {
-    [_positions replaceObjectAtIndex:index withObject:position];
+    _positions[index] = position;
 }
 
 @end

@@ -28,7 +28,6 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 @property(readwrite, retain) NSShadow *shadowCrosshairs;
 
 - (void)drawDisabledInRect:(NSRect)dirtyRect;
-- (void)setNeedsDisplayInShadowCrosshairsRect;
 
 - (void)setAngle:(double)angle invalidatingRects:(BOOL)shouldInvalidateRects;
 - (void)setOffset:(double)offset invalidatingRects:(BOOL)shouldInvalidateRects;
@@ -43,6 +42,8 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 
 // Accessors
 - (BOOL)isDisplayable;
+
+- (NSRect)shadowCrosshairsRect;
 
 - (NSSize)cartesianOffset;
 - (void)setCartesianOffset:(NSSize)cartesianOffset;
@@ -86,11 +87,11 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
         [_crosshairsPath lineToPoint:NSMakePoint(PGJoystickViewCrosshairsHalfWidth, 0)];
         [_crosshairsPath moveToPoint:NSMakePoint(0, -PGJoystickViewCrosshairsHalfWidth)];
         [_crosshairsPath lineToPoint:NSMakePoint(0, PGJoystickViewCrosshairsHalfWidth)];
-        [_crosshairsPath setLineWidth:2.0];
+        _crosshairsPath.lineWidth = 2.0;
 
         self.shadowCrosshairs = [[NSShadow alloc] init];
-        [_shadowCrosshairs setShadowBlurRadius:PGJoystickViewShadowCrosshairsBlurRadius];
-        [_shadowCrosshairs setShadowColor:[NSColor grayColor]];
+        _shadowCrosshairs.shadowBlurRadius = PGJoystickViewShadowCrosshairsBlurRadius;
+        _shadowCrosshairs.shadowColor = [NSColor grayColor];
     }
     
     return self;
@@ -110,7 +111,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 - (void)drawRect:(NSRect)dirtyRect
 {
     // If not displayable, draw disabled in rect
-    if (![self isDisplayable]) {
+    if (!self.isDisplayable) {
         [self drawDisabledInRect:dirtyRect];
         return;
     }
@@ -129,11 +130,11 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     [originTranslation concat];
     
     // Put our shadow crosshairs in the right spot and set it
-    [_shadowCrosshairs setShadowOffset:[self cartesianOffset]];
-    [_shadowCrosshairs set];
+    [self.shadowCrosshairs setShadowOffset:self.cartesianOffset];
+    [self.shadowCrosshairs set];
 
     [[NSColor blackColor] set];
-    [_crosshairsPath stroke];
+    [self.crosshairsPath stroke];
 }
 
 
@@ -147,15 +148,15 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 }
 
 
-- (void)setNeedsDisplayInShadowCrosshairsRect
+- (NSRect)shadowCrosshairsRect
 {
-    NSRect bounds = [self bounds];
-    NSSize offset = [self cartesianOffset];
-
-    [self setNeedsDisplayInRect:NSMakeRect(NSMidX(bounds) + offset.width - PGJoystickViewCrosshairsHalfWidth - PGJoystickViewShadowCrosshairsBlurRadius,
-                                           NSMidY(bounds) + offset.height - PGJoystickViewCrosshairsHalfWidth - PGJoystickViewShadowCrosshairsBlurRadius,
-                                           PGJoystickViewCrosshairsWidth + 2 * PGJoystickViewShadowCrosshairsBlurRadius,
-                                           PGJoystickViewCrosshairsWidth + 2 * PGJoystickViewShadowCrosshairsBlurRadius)];
+    NSRect bounds = self.bounds;
+    NSSize offset = self.cartesianOffset;
+    
+    return NSMakeRect(NSMidX(bounds) + offset.width - PGJoystickViewCrosshairsHalfWidth - PGJoystickViewShadowCrosshairsBlurRadius,
+                      NSMidY(bounds) + offset.height - PGJoystickViewCrosshairsHalfWidth - PGJoystickViewShadowCrosshairsBlurRadius,
+                      PGJoystickViewCrosshairsWidth + 2 * PGJoystickViewShadowCrosshairsBlurRadius,
+                      PGJoystickViewCrosshairsWidth + 2 * PGJoystickViewShadowCrosshairsBlurRadius);
 }
 
 
@@ -198,15 +199,15 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 
 - (NSValueTransformer *)valueTransformerForBinding:(NSString *)binding
 {
-    NSDictionary *options = [[_bindingsInfo objectForKey:binding] objectForKey:NSOptionsKey];
+    NSDictionary *options = _bindingsInfo[binding][NSOptionsKey];
     if (!options) return nil;
     
     // Try to get a value transformer instance first
-    id transformer = [options objectForKey:NSValueTransformerBindingOption];
+    id transformer = options[NSValueTransformerBindingOption];
     if (transformer && transformer != [NSNull null]) return transformer;
     
     // Else, try to get the value transformer by name
-    id name = [options objectForKey:NSValueTransformerNameBindingOption];
+    id name = options[NSValueTransformerNameBindingOption];
     return (name && name != [NSNull null]) ? [NSValueTransformer valueTransformerForName:name] : nil;
 }
 
@@ -239,7 +240,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 }
 
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
 {
     // If the context isn't for one of our bindings, pass it to the superclass
     NSString *binding = (__bridge NSString *)context;
@@ -249,7 +250,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     }
     
     // Get the new value for the changed object
-    id value = [change objectForKey:NSKeyValueChangeNewKey];
+    id value = change[NSKeyValueChangeNewKey];
     if (!value || value == [NSNull null]) {
         value = [object valueForKeyPath:keyPath];
     }
@@ -263,8 +264,8 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
         }
         
         // If we were displayable before, we need to be redrawn
-        BOOL wasDisplayable = [self isDisplayable];
-        [_bindingsMarkers setObject:value forKey:binding];
+        BOOL wasDisplayable = self.isDisplayable;
+        _bindingsMarkers[binding] = value;
         if (wasDisplayable) {
             [self setNeedsDisplay:YES];
         }
@@ -273,11 +274,11 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     }
     
     // If we got this far, there shouldn't be a marker value for this binding in our dictionary
-    BOOL wasDisplayable = [self isDisplayable];
+    BOOL wasDisplayable = self.isDisplayable;
     [_bindingsMarkers removeObjectForKey:binding];
     
     // If we weren't displayable before, but we're displayable now, redraw the whole view
-    if (!wasDisplayable && [self isDisplayable]) {
+    if (!wasDisplayable && self.isDisplayable) {
         [self setNeedsDisplay:YES];
     }
     
@@ -302,17 +303,17 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     }
     
     // If there is no binding info, the binding hasn't been established
-    NSDictionary *bindingInfo = [_bindingsInfo objectForKey:binding];
+    NSDictionary *bindingInfo = _bindingsInfo[binding];
     if (!bindingInfo) return;
 
     // Stop observing the value of the binding's observed object's key path
-    id observedObject = [bindingInfo objectForKey:NSObservedObjectKey];
-    NSString *observedKeyPath = [bindingInfo objectForKey:NSObservedKeyPathKey];
+    id observedObject = bindingInfo[NSObservedObjectKey];
+    NSString *observedKeyPath = bindingInfo[NSObservedKeyPathKey];
     [observedObject removeObserver:self forKeyPath:observedKeyPath context:context];
     
     // Remove the binding info from our dictionary
     [_bindingsInfo removeObjectForKey:binding];
-    if ([_bindingsMarkers objectForKey:binding]) {
+    if (_bindingsMarkers[binding]) {
         [_bindingsMarkers removeObjectForKey:binding];
         [self setNilValueForKey:binding];
     }
@@ -322,7 +323,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 - (void)updateObservedObjectForBinding:(NSString *)binding
 {
     // If there is no established binding, we're done
-    NSDictionary *bindingInfo = [_bindingsInfo objectForKey:binding];
+    NSDictionary *bindingInfo = _bindingsInfo[binding];
     if (!bindingInfo) return;
     
     // Get the value to set on the observed object
@@ -335,8 +336,8 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     }
     
     // Update the observed object's value for the observed key path
-    id observedObject = [bindingInfo objectForKey:NSObservedObjectKey];
-    NSString *observedKeyPath = [bindingInfo objectForKey:NSObservedKeyPathKey];
+    id observedObject = bindingInfo[NSObservedObjectKey];
+    NSString *observedKeyPath = bindingInfo[NSObservedKeyPathKey];
     [observedObject setValue:value forKeyPath:observedKeyPath];
 }
 
@@ -345,7 +346,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 
 - (BOOL)isDisplayable
 {
-    return [_bindingsMarkers count] == 0;
+    return _bindingsMarkers.count == 0;
 }
 
 
@@ -358,7 +359,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 
 - (void)setCartesianOffset:(NSSize)cartesianOffset
 {
-    [self setNeedsDisplayInShadowCrosshairsRect];
+    [self setNeedsDisplayInRect:self.shadowCrosshairsRect];
     
     double oldOffset = _offset;
     [self setOffset:hypot(cartesianOffset.width, cartesianOffset.height) invalidatingRects:NO];
@@ -372,7 +373,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
         [self updateObservedObjectForBinding:PGJoystickViewAngleBindingName];
     }
     
-    [self setNeedsDisplayInShadowCrosshairsRect];
+    [self setNeedsDisplayInRect:self.shadowCrosshairsRect];
 }
 
 
@@ -392,9 +393,9 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     angle = fmod(angle, 360);
     if (angle < 0) angle += 360;
     if (_angle == angle) return;
-    if (shouldInvalidateRects) [self setNeedsDisplayInShadowCrosshairsRect];
+    if (shouldInvalidateRects) [self setNeedsDisplayInRect:self.shadowCrosshairsRect];
     _angle = angle;
-    if (shouldInvalidateRects) [self setNeedsDisplayInShadowCrosshairsRect];
+    if (shouldInvalidateRects) [self setNeedsDisplayInRect:self.shadowCrosshairsRect];
 }
 
 
@@ -408,9 +409,9 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 {
     offset = fmin(fabs(offset), _maximumOffset);
     if (offset == _offset) return;
-    if (shouldInvalidateRects) [self setNeedsDisplayInShadowCrosshairsRect];
+    if (shouldInvalidateRects) [self setNeedsDisplayInRect:self.shadowCrosshairsRect];
     _offset = offset;
-    if (shouldInvalidateRects) [self setNeedsDisplayInShadowCrosshairsRect];
+    if (shouldInvalidateRects) [self setNeedsDisplayInRect:self.shadowCrosshairsRect];
 }
 
 
@@ -425,7 +426,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     _maximumOffset = fabs(maximumOffset);
     
     if (_offset > _maximumOffset) {
-        [self setOffset:_offset];
+        self.offset = _offset;
         [self updateObservedObjectForBinding:PGJoystickViewOffsetBindingName];
     }
 }
@@ -436,7 +437,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 - (void)updatePositionForMouseEvent:(NSEvent *)event
 {
     NSPoint point = [self convertPoint:[event locationInWindow] fromView:nil];
-    NSRect bounds = [self bounds];
+    NSRect bounds = self.bounds;
     [self setCartesianOffset:NSMakeSize(point.x - NSMidX(bounds), point.y - NSMidY(bounds))];
 }
 
@@ -464,7 +465,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
     NSString *characters = [event charactersIgnoringModifiers];
     unichar key = [characters characterAtIndex:0];
     
-    NSSize cartesianOffset = [self cartesianOffset];
+    NSSize cartesianOffset = self.cartesianOffset;
     switch (key) {
         case NSUpArrowFunctionKey:
             cartesianOffset.height += 1;
@@ -486,7 +487,7 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
             return;
     }
     
-    [self setCartesianOffset:cartesianOffset];
+    self.cartesianOffset = cartesianOffset;
 }
 
 @end

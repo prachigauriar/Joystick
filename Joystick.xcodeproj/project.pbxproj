@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C03B51A17027D6800900E24 /* MainMenu-ObjectController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C03B51817027D6800900E24 /* MainMenu-ObjectController.xib */; };
 		4CE224DB170227C10053CFAD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE224DA170227C10053CFAD /* Cocoa.framework */; };
 		4CE224E5170227C10053CFAD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CE224E3170227C10053CFAD /* InfoPlist.strings */; };
 		4CE224E7170227C10053CFAD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224E6170227C10053CFAD /* main.m */; };
 		4CE224EB170227C10053CFAD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4CE224E9170227C10053CFAD /* Credits.rtf */; };
-		4CE224F1170227C10053CFAD /* MainMenu-ArrayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE224EF170227C10053CFAD /* MainMenu-ArrayController.xib */; };
+		4CE224F1170227C10053CFAD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CE224EF170227C10053CFAD /* MainMenu.xib */; };
 		4CE224FD170227EF0053CFAD /* PGJoystickController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224F8170227EF0053CFAD /* PGJoystickController.m */; };
 		4CE224FE170227EF0053CFAD /* PGJoystickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224FA170227EF0053CFAD /* PGJoystickView.m */; };
 		4CE224FF170227EF0053CFAD /* PGPolarCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224FC170227EF0053CFAD /* PGPolarCoordinate.m */; };
@@ -20,7 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4C03B51917027D6800900E24 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MainMenu-ObjectController.xib"; sourceTree = "<group>"; };
 		4CE224D7170227C10053CFAD /* Joystick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joystick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE224DA170227C10053CFAD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4CE224DD170227C10053CFAD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -31,7 +29,7 @@
 		4CE224E6170227C10053CFAD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4CE224E8170227C10053CFAD /* Joystick-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Joystick-Prefix.pch"; sourceTree = "<group>"; };
 		4CE224EA170227C10053CFAD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		4CE224F0170227C10053CFAD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MainMenu-ArrayController.xib"; sourceTree = "<group>"; };
+		4CE224F0170227C10053CFAD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		4CE224F7170227EF0053CFAD /* PGJoystickController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGJoystickController.h; sourceTree = "<group>"; };
 		4CE224F8170227EF0053CFAD /* PGJoystickController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGJoystickController.m; sourceTree = "<group>"; };
 		4CE224F9170227EF0053CFAD /* PGJoystickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGJoystickView.h; sourceTree = "<group>"; };
@@ -99,8 +97,7 @@
 				4CE224F8170227EF0053CFAD /* PGJoystickController.m */,
 				4CE224F9170227EF0053CFAD /* PGJoystickView.h */,
 				4CE224FA170227EF0053CFAD /* PGJoystickView.m */,
-				4C03B51817027D6800900E24 /* MainMenu-ObjectController.xib */,
-				4CE224EF170227C10053CFAD /* MainMenu-ArrayController.xib */,
+				4CE224EF170227C10053CFAD /* MainMenu.xib */,
 				4CE22503170228180053CFAD /* Utilities */,
 				4CE224E1170227C10053CFAD /* Supporting Files */,
 			);
@@ -155,7 +152,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PG;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Prachi Gauriar";
 			};
 			buildConfigurationList = 4CE224D2170227C10053CFAD /* Build configuration list for PBXProject "Joystick" */;
@@ -182,8 +179,7 @@
 			files = (
 				4CE224E5170227C10053CFAD /* InfoPlist.strings in Resources */,
 				4CE224EB170227C10053CFAD /* Credits.rtf in Resources */,
-				4CE224F1170227C10053CFAD /* MainMenu-ArrayController.xib in Resources */,
-				4C03B51A17027D6800900E24 /* MainMenu-ObjectController.xib in Resources */,
+				4CE224F1170227C10053CFAD /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,14 +201,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4C03B51817027D6800900E24 /* MainMenu-ObjectController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4C03B51917027D6800900E24 /* en */,
-			);
-			name = "MainMenu-ObjectController.xib";
-			sourceTree = "<group>";
-		};
 		4CE224E3170227C10053CFAD /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -229,12 +217,12 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		4CE224EF170227C10053CFAD /* MainMenu-ArrayController.xib */ = {
+		4CE224EF170227C10053CFAD /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				4CE224F0170227C10053CFAD /* en */,
 			);
-			name = "MainMenu-ArrayController.xib";
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -244,7 +232,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -277,7 +264,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
