@@ -242,7 +242,8 @@ static NSString *const PGJoystickViewMaximumOffsetBindingName = @"maximumOffset"
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
 {
-    // If the context isn't for one of our bindings, pass it to the superclass
+    // If the context isn't for one of our bindings, pass it to the superclass. Note that we can't simply do set membership,
+    // because if the binding is not ours, we can't guarantee it's an object.
     NSString *binding = (__bridge NSString *)context;
     if (binding != PGJoystickViewAngleBindingName && binding != PGJoystickViewOffsetBindingName && binding != PGJoystickViewMaximumOffsetBindingName) {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
