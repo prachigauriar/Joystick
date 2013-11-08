@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C1CCA72182C9A51000D9EE5 /* PGGeometryUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1CCA71182C9A51000D9EE5 /* PGGeometryUtilities.m */; };
 		4CE224DB170227C10053CFAD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE224DA170227C10053CFAD /* Cocoa.framework */; };
 		4CE224E5170227C10053CFAD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CE224E3170227C10053CFAD /* InfoPlist.strings */; };
 		4CE224E7170227C10053CFAD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224E6170227C10053CFAD /* main.m */; };
@@ -15,10 +16,11 @@
 		4CE224FD170227EF0053CFAD /* PGJoystickController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224F8170227EF0053CFAD /* PGJoystickController.m */; };
 		4CE224FE170227EF0053CFAD /* PGJoystickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224FA170227EF0053CFAD /* PGJoystickView.m */; };
 		4CE224FF170227EF0053CFAD /* PGPolarCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE224FC170227EF0053CFAD /* PGPolarCoordinate.m */; };
-		4CE22502170228020053CFAD /* PGGeometryUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE22501170228020053CFAD /* PGGeometryUtilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C1CCA70182C9A51000D9EE5 /* PGGeometryUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGGeometryUtilities.h; sourceTree = "<group>"; };
+		4C1CCA71182C9A51000D9EE5 /* PGGeometryUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGGeometryUtilities.m; sourceTree = "<group>"; };
 		4CE224D7170227C10053CFAD /* Joystick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joystick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE224DA170227C10053CFAD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4CE224DD170227C10053CFAD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -36,8 +38,6 @@
 		4CE224FA170227EF0053CFAD /* PGJoystickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGJoystickView.m; sourceTree = "<group>"; };
 		4CE224FB170227EF0053CFAD /* PGPolarCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGPolarCoordinate.h; sourceTree = "<group>"; };
 		4CE224FC170227EF0053CFAD /* PGPolarCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGPolarCoordinate.m; sourceTree = "<group>"; };
-		4CE22500170228020053CFAD /* PGGeometryUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PGGeometryUtilities.h; path = ../../../Common/Utilities/PGGeometryUtilities.h; sourceTree = "<group>"; };
-		4CE22501170228020053CFAD /* PGGeometryUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PGGeometryUtilities.m; path = ../../../Common/Utilities/PGGeometryUtilities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,8 +119,8 @@
 		4CE22503170228180053CFAD /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				4CE22500170228020053CFAD /* PGGeometryUtilities.h */,
-				4CE22501170228020053CFAD /* PGGeometryUtilities.m */,
+				4C1CCA70182C9A51000D9EE5 /* PGGeometryUtilities.h */,
+				4C1CCA71182C9A51000D9EE5 /* PGGeometryUtilities.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -193,8 +193,8 @@
 				4CE224E7170227C10053CFAD /* main.m in Sources */,
 				4CE224FD170227EF0053CFAD /* PGJoystickController.m in Sources */,
 				4CE224FE170227EF0053CFAD /* PGJoystickView.m in Sources */,
+				4C1CCA72182C9A51000D9EE5 /* PGGeometryUtilities.m in Sources */,
 				4CE224FF170227EF0053CFAD /* PGPolarCoordinate.m in Sources */,
-				4CE22502170228020053CFAD /* PGGeometryUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
